@@ -20,7 +20,9 @@ class App extends React.Component {
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await creatUserProfileDocument(userAuth);
+
         userRef.onSnapshot(snapShot => {
+
           setCurrentUser({
             id: snapShot.id,
             ...snapShot.data()
@@ -29,6 +31,7 @@ class App extends React.Component {
       }
       else {
         setCurrentUser(userAuth)
+
       }
     })
   }
@@ -61,7 +64,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
 });
 
 const mapDispatchToProps = dispatch => ({
